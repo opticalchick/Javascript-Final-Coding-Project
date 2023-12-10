@@ -36,7 +36,7 @@ class Deck {
         return shuffledDeck;
     }
     //this method deals cards to the players
-    dealDeck(players, shuffledCards) {
+    dealCards(players, shuffledCards) {
         console.log(`Dealing the cards`);
         let dealingCards1 = shuffledCards.splice(0, 26);
         players[0].hand.push(...dealingCards1);
@@ -68,7 +68,7 @@ class Game {
         myDeck.createDeck();
         let shuffledDeck = myDeck.shuffleDeck();
 
-        myDeck.dealDeck(this.players, shuffledDeck);
+        myDeck.dealCards(this.players, shuffledDeck);
 
         this.playGame();
 
@@ -85,8 +85,8 @@ class Game {
         let turn = 1;
 
         while (player1.hand.length !== 0 && player2.hand.length !== 0) {
-            let player1Card = player1.hand.pop();
-            let player2Card = player2.hand.pop();
+            let player1Card = player1.hand.shift();
+            let player2Card = player2.hand.shift();
 
             if (player1Card.value > player2Card.value) {
                 roundWinner = player1.name;
@@ -112,6 +112,7 @@ class Game {
             }
         }
     }
+    //this will display the results of the game to the console
     endGame() {
         let gameWinner = '';
         let player1 = this.players[0];
